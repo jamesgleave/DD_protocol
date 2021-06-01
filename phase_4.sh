@@ -4,7 +4,8 @@
 #SBATCH --mem=0               # memory per node
 #SBATCH --job-name=phase_4
 
-env=${10}
+env=${11}
+time=${10}
 
 source ~/.bashrc
 conda activate $env
@@ -49,7 +50,7 @@ else
 fi
 
 echo "Creating simple jobs"
-python scripts_2/simple_job_models.py -n_it $1 -mdd $morgan_directory -time 00-04:00 -file_path $file_path/$protein -nhp $nhp -titr $6 -n_mol $num_molec -pfm $7 -plm $8 -ct $rec -gp $part_gpu -tf_e $env -isl $last
+python scripts_2/simple_job_models.py -n_it $1 -mdd $morgan_directory -time $time -file_path $file_path/$protein -nhp $nhp -titr $6 -n_mol $num_molec -pfm $7 -plm $8 -ct $rec -gp $part_gpu -tf_e $env -isl $last
 
 cd $file_path/$protein/iteration_$1
 rm model_no.txt
