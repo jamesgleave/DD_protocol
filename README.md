@@ -19,9 +19,9 @@ The only installation step required for DD is to create a conda environment and 
 
 The majority of the DD steps can be run on regular CPU cores; for model training and inference however, the use of GPUs is recommended. To run the automated version (see below, B section), a computing cluster with slurm job scheduler is required.
 
-# Test data
-A complete example of DD iteration for testing the protocol is available from https://drive.google.com/drive/folders/1s1wjoNXZR1wijVABgLl6HeKzokAlxcAG?usp=sharing. A DD-prepared version of the ZINC20 library (as available in March 2021) that can readily be screened with the protocol is available at https://drive.google.com/drive/folders/1-XlN3spOI-bAKhRdfIhA_Q0l2EsITeaD?usp=sharing
 
+## Test data
+A complete example of DD iteration for testing the protocol is available from https://drive.google.com/drive/folders/1s1wjoNXZR1wijVABgLl6HeKzokAlxcAG?usp=sharing. A DD-prepared version of the ZINC20 library (as available in March 2021) that can readily be screened with the protocol is available at https://drive.google.com/drive/folders/1-XlN3spOI-bAKhRdfIhA_Q0l2EsITeaD?usp=sharing
 
 
 ## Help
