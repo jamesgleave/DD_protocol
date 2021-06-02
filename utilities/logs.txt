@@ -1,0 +1,9 @@
+/home/DeepDocking/projects                               #Path to the project folder
+protein_test_automated                                   #Name of project folder
+/home/DeepDocking/docking_grid/glide_grid.zip            #Location of the docking grid
+/home/DeepDocking/library_prepared_fp                    #Location of the fingerprint library
+/home/DeepDocking/library_prepared                       #Location of the SMILES library
+Glide                                                    #Name of the docking program (either Glide or FRED)
+24                                                       #Number of models to train (different combinations of hyperparameters)
+1000000                                                  #Size of validation and test sets
+~/DeepDocking/DD_protocolscripts_1/glide_template.in     #Location of the Glide docking template script (leave blank if FRED is used)
