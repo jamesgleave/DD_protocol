@@ -105,13 +105,13 @@ python simple_job_predictions_manual.py --project_name project --file_path path_
 * `simple_job_predictions.py` creates bash scripts to run the predictions over the full database using the `Prediction_morgan_1024.py` script. Inference scripts will be saved in the `simple_job_predictions` folder of the current iteration, and they should be run on GPU nodes in order to predict virtual hits from the full database. Prospective hits will be saved in `morgan_1024_predictions` folder of the current iteration, together with their virutal hit likeness.
 
 ### vi. Final docking phase
-After the last iteration of DD is complete, SMILES of all or a ranked subset of the predicted virtual hits can be obtained for the final docking. Ranking is based on the probabilities of being virtual hits. Use the following script (availabe in `utilities`).
+After the last iteration of DD is complete, SMILES of all or a ranked subset of the predicted virtual hits can be obtained for the final docking. Ranking is based on the probabilities of being virtual hits. With the environment activated, use the following script (availabe in `utilities`):
 
 ```bash
 python final_extraction.py -smile_dir path_smiles_library/smiles_library -prediction_dir path_last_iteration/morgan_1024_predictions -processors n_cpus -mols_to_dock num_molecules_to_dock
 ```
 
-Executing this script will return the SMILES of all the predicted virtual hits of the last iteration or the top `num_molecules_to_dock` molecules ranked by their virtual hit likeness. If *mols_to_dock* is not specified, all the prospective hits will be extracted. Virtual hit likeness will also be returned in a separated file. These molecules can be then docked into the target of interest.
+to return the SMILES of all the predicted virtual hits of the last iteration or the top `num_molecules_to_dock` molecules ranked by their virtual hit likeness. If *mols_to_dock* is not specified, all the prospective hits will be extracted. Virtual hit likeness will also be returned in a separated file. These molecules can be then docked into the target of interest.
 
 
 ## B. Run automated Deep Docking on HPC clusters
