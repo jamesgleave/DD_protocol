@@ -1,6 +1,6 @@
 # The Deep Docking protocol
 
-Deep docking (DD) is a deep learning-based tool developed to accelerate docking-based virtual screening. Using a docking program of choice, the method allows to virtually screem extensive chemical libraries 50 times faster than conventional docking. For further details into the processes behind DD, please refer to our paper (https://doi.org/10.1021/acscentsci.0c00229). This repository provides all the scripts required to run different stages of DD, and also slurm programs to automatically perform the protocol on a computing cluster using either Glide SP or FRED docking. The protocol can be trivially adapted to any other docking program.
+Deep docking (DD) is a deep learning-based tool developed to accelerate docking-based virtual screening. Using a docking program of choice, the method allows to virtually screem extensive chemical libraries 50 times faster than conventional docking without losing valuable drug candidates. For further details into the processes behind DD, please refer to our paper (https://doi.org/10.1021/acscentsci.0c00229). This repository provides all the scripts required to run different stages of DD, and also slurm programs to automatically perform the protocol on a computing cluster using either Glide SP or FRED docking. The protocol can be trivially adapted to any other docking program.
 
 If you use DD in your research, please cite:
 
@@ -54,7 +54,7 @@ which will create all the fingerprints and place them in `path_morgan_library/mo
 ### ii. Phase 1. Random sampling of molecules
 In phase 1 molecules are randomly sampled from the database to generate or augment the training set. During the first iteration, this phase also generates validation and test sets.
 
-Create a project folder. To run phase 1, run the following scripts (from *scripts_1* folder) sequentially with the activated conda environment:
+Create a project folder. Run the following scripts (from *scripts_1* folder) sequentially with the activated conda environment:
 
 ```bash
 python molecular_file_count_updated.py --project_name project --n_iteration current_iteration --data_directory left_mol_directory --tot_process num_cpus --tot_sampling  molecules_to_dock
