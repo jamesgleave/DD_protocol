@@ -126,7 +126,7 @@ for i in $(ls smiles/smile_all_*.smi); do sbatch compute_states.sh $i library_pr
 THe SMILES will be prepared and saved into the `library_prepared` folder. Note that this program will enumerate all the unspecified chiral centers of the molecules and assign unique names to each isomer, and then calculate the dominant tautomer at pH 7.4. The next step is the calculation of Morgan fingerprints; run:
 
 ```bash
-sbatch --cpus-per-task num_cpu compute_morgan_fp.sh library_prepared library_prepared_fp num_cpu name_conda_environment
+sbatch --cpus-per-task n_cpus_per_node compute_morgan_fp.sh library_prepared library_prepared_fp n_cpus_per_node name_conda_environment
 ```
 to calculate the Morgan fingerprints and save them in `library_prepared_fp`.
 
@@ -137,52 +137,55 @@ Create a `logs.txt` file with parameters that will be read by the slurm scripts,
 Run:
 
 ```bash
-sbatch --cpus-per-task n_cpus phase_1.sh n_iteration n_cpus path_to_project_without_name project_name training_sample_size conda_env_name
+sbatch --cpus-per-task n_cpus_per_node phase_1.sh current_iteration n_cpus_per_node path_to_project_without_project_name project_name training_sample_size conda_env_name
 ```
 
 ### iv. Automated phase 2
 The provided automated version of DD works with Glide docking or FRED docking; the choice of the program (listed in `logs.txt`) influences both how the SMILES are translated to 3D structures and how they are successively docked. For creating conformations for Glide docking, run:
 
 ```bash
-sbatch phase_2_glide.sh 1 60 ~/DeepDocking/projects protein_test_automated cpu-partition
+sbatch phase_2_glide.sh current_iteration n_cpus_per_node path_to_project_without_project_name project_name name_cpu_partition
 ```
 
 OR for creating conformations for FRED docking, run:
 
 ```bash
-sbatch phase_2_fred.sh 1 60 ~/DeepDocking/projects protein_test_automated cpu-partition
+sbatch phase_2_fred.sh current_iteration n_cpus_per_node path_to_project_without_project_name project_name name_cpu_partition
 ```
 
 ### v. Automated phase 3
 For Glide docking, run:
 
 ```bash
-sbatch phase_3_glide.sh 1 600 ~/DeepDocking/projects protein_test_automated
+sbatch phase_3_glide.sh current_iteration n_cpus_total path_to_project_without_project_name project_name
 ```
 
 For FRED docking, run:
 
 ```bash
-sbatch phase_3_fred.sh 1 60 ~/DeepDocking/projects protein_test_automated cpu-partition
+sbatch phase_3_fred.sh current_iteration n_cpus_per_node path_to_project_without_project_name project_name name_cpu_partition
 ```
 
 ### iv. Automated phase 4
 Run:
 
 ```bash
-sbatch phase_4.sh current_iteration 3 ~/DeepDocking/projects protein_test_automated gpu-partition 11 1 0.01 0.90 00-04:00 dd-env
+sbatch phase_4.sh current_iteration 3 path_to_project_without_project_name project_name name_gpu_partition tot_number_iterations percent_first_mols percent_last_mols recall_value 00-04:00 name_conda_env
 ```
+00-04:00 is the maximal training time (days-hours:mins). Use a value between 4 and 20 hours.
 
 ### v. Automated phase 5
 Run:
 
 ```bash
-sbatch phase_5.sh 1 ~/DeepDocking/projects protein_test_automated 0.90 gpu-partition dd-env
+sbatch phase_5.sh current_iteration path_to_project_without_project_name project_name recall_value name_gpu_partition name_conda_env
 ```
 
 ### vi. Automated final phase
 Run:
 
 ```bash
-sbatch --cpus-per-task 60 final_extraction.sh ~/DeepDocking/library_prepared /DeepDocking/projects/protein_test/iteration_11/morgan_1024_predictions 60 'all_mol' dd-env
+sbatch --cpus-per-task n_cpus_per_node final_extraction.sh location_smiles_library path_to_project/project/iteration_(last value)/morgan_1024_predictions n_cpus_per_node 'all_mol' name_conda_env
 ```
+
+*all_mol* will exctrat all the prospective virtual hits. If less molecules need to be extracted for docking (for example, if the final number is high and resources are limited), change the argument accordingly. The resulting SMILES can then be prepared and docked into the target.
