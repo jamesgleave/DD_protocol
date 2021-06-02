@@ -187,7 +187,7 @@ sbatch phase_5.sh current_iteration path_project project recall_value name_gpu_p
 Run:
 
 ```bash
-sbatch --cpus-per-task n_cpus_per_node final_extraction.sh path_smiles_library/smiles_library path_last_iteration/morgan_1024_predictions n_cpus_per_node 'all_mol' nconda_env
+sbatch --cpus-per-task n_cpus_per_node final_extraction.sh path_smiles_library/smiles_library path_last_iteration/morgan_1024_predictions n_cpus_per_node 'all_mol' conda_env
 ```
 
 *all_mol* will extract all the prospective virtual hits. If less molecules need to be selected for docking (for example, if the final number of predicted hits is too high to be docked with the available resources), change the argument accordingly to extract a smaller subset of molecules ranked by their virtual hit likeness. The resulting SMILES can then be prepared and docked into the target.
