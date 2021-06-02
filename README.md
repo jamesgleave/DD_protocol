@@ -36,20 +36,21 @@ python script.py -h
 Here we present in details how to use each individual script constituting DD. If you have access to an HPC cluster, you may want to consider running the automated protocol using a job scheduler (see Run automated Deep Docking on HPC clusters section below).
 
 ### i. Preparing a database
-In order to be prepared for DD virtual screening, the chemical library must be in SMILES format. DD requires to calculate the Morgan fingerprint of radius 2 and size 1024 bits of each molecule, represented as the list of the indexes of bits that are set to 1. It is recommended to split the library of SMILES into a number of evenly populated files to facilitate other steps such as random sampling and inference, and place these files into a new folder. This reorganization can be achieved for example with the `split` bash command. For example, consider a `smiles.smi` file with a billion compounds, to obtain 1000 files of 1 million molecules each you can run:
+In order to be prepared for DD virtual screening, the chemical library must be in SMILES format. DD requires Morgan fingerprints of radius 2 and size 1024 bits for each molecule, represented in a compressed form as a list of the indexes of bits that are set to 1. 
+It is recommended to split the library of SMILES into a number of evenly populated files to facilitate other steps such as random sampling and inference, and place these files into a new folder. This reorganization can be achieved for example with the `split` bash command. For example, consider a `smiles.smi` file with a billion compounds, to obtain 1000 files of 1 million molecules each you can run:
 
 ```bash
 split -d -l 1000000 smiles.smi smile_all_ --additional-suffix=.smi
 ```
 
-Ideally the number of files should be equal to the number of CPUs used for random sampling. After this step, stereoisomers, tautomers and protomers should be calculated for each molecule and stored in txt files (e.g. smiles_all_1.txt).
+Ideally the number of split files should be equal to the number of CPUs used for random sampling. After this step, stereoisomers, tautomers and protomers should be calculated for each molecule and stored in txt files (e.g. smiles_all_1.txt).
 
-Once the SMILES have been prepared, activate the conda environemnt with rdkit and calculate Morgan fingerprints using the `morgan_fing.py` script (located in the `utilities` folder):
+Once the SMILES have been prepared, activate the conda environment with rdkit and calculate Morgan fingerprints using the `morgan_fp.py` script (located in the `utilities` folder):
 
 ```bash
-python morgan_fing.py --smile_folder_path path_smiles_library/smiles_library --folder_name path_morgan_library/morgan_library --tot_process num_cpus
+python morgan_fp.py --smile_folder_path path_smiles_library/smiles_library --folder_name path_morgan_library/morgan_library --tot_process num_cpus
 ```
-which will create all the fingerprints and place them in `path_morgan_library/morgan_library`. *--tot_process* argument controls how many files will be processed in parallel using multiprocessing.
+which will create all the fingerprints and place them in `path_morgan_library/morgan_library`. The *--tot_process* argument controls how many files will be processed in parallel using multiprocessing.
 
 ### ii. Phase 1. Random sampling of molecules
 In phase 1 molecules are randomly sampled from the database to generate or augment the training set. During the first iteration, this phase also generates validation and test sets.
