@@ -58,7 +58,6 @@ nhp = int(io_args.number_of_hyp)
 isl = io_args.is_last
 titr = int(io_args.total_iterations)
 rec = float(io_args.recall)
-gpu_part = str(io_args.gpu_part)
 protein = str(io_args.file_path).split('/')[-1]
 
 num_molec = int(io_args.number_mol)
