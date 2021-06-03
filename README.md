@@ -53,7 +53,7 @@ python morgan_fp.py --smile_folder_path path_smiles_library/smiles_library --fol
 which will create all the fingerprints and place them in `path_morgan_library/morgan_library`. The *--tot_process* argument controls how many files will be processed in parallel using multiprocessing.
 
 ### ii. Phase 1. Random sampling of molecules
-In phase 1 molecules are randomly sampled from the database to generate or augment the training set. During the first iteration, this phase also generates validation and test sets.
+In phase 1 molecules are randomly sampled from the database to generate or augment the training set. During the first iteration, this phase also samples molecules for the validation and test sets.
 
 Create a project folder. Run the following scripts (from *scripts_1* folder) sequentially with the activated conda environment:
 
@@ -62,7 +62,7 @@ python molecular_file_count_updated.py --project_name project --n_iteration curr
 python sampling.py --project_name  project --file_path path_project --n_iteration current_iteration --data_director left_mol_directory --tot_process num_cpus --train_size train_size --val_size val_size
 python sanity_check.py  --project_name project --file_path path_project --n_iteration current_iteration
 python extracting_morgan.py --project_name project --file_path path_project --n_iteration current_iteration --morgan_directory path_morgan_library/morgan_library --tot_process num_cpus
-python extracting_smiles.py -pt project -fp path_project -it current_iteration -smd path_smiles_library/smiles_library -t_pos num_cpus
+python extracting_smiles.py --project_name project --file_path path_project --n_iteration current_iteration --smile_directory path_smiles_library/smiles_library --tot_process num_cpus
 ```
 
 * `molecular_file_count_updated.py` determines the number of molecules to be sampled from each file of the database. The sample sizes (per million) are stored in `Mol_ct_file_updated_project_name.csv` file created in the `left_mol_directory` directory.
@@ -71,7 +71,7 @@ python extracting_smiles.py -pt project -fp path_project -it current_iteration -
 
 * `sanity_check.py` removes overlaps between the sets.
 
-* `extracting_morgan.py` and `extracting_smiles.py` extract Morgan fingerprints and SMILES for the molecules that were randomly sampled, and save them in `morgan` and `smiles` folders inside the directory of the current iteration.
+* `extracting_morgan.py` and `extracting_smiles.py` extract Morgan fingerprints and SMILES for the molecules that were randomly sampled, and saves them in `morgan` and `smiles` folders inside the directory of the current iteration.
 
 **IMPORTANT:** For `molecular_file_count_updated.py` AND `sampling.py` the option `left_mol_directory` must be the directory from where molecules are sampled; for iteration 1, `left_mol_directory` is the directory where the Morgan fingerprints of the library are stored; BUT for successive iterations this must be the path to `morgan_1024_predictions` folder of the previous iteration. This will ensure that sampling is done progressively on better scoring subsets of the database over the course of DD.
 
@@ -82,18 +82,19 @@ After phase 1 is completed, molecules grouped in the *smiles* folder can be prep
 In phase 4, deep neural network models are trained with the docking scores from the previous phase. Run the following scripts from *scripts_2*, after activating the environment:
 
 ```bash
-python extract_labels.py --project_name project --file_path path_to_project --iteration_no current_iteration --tot_process 3 -score score_keyword
+python extract_labels.py --project_name project --file_path path_to_project --iteration_no current_iteration --tot_process num_cpus -score score_keyword
 python simple_job_models_manual.py --iteration_no current_iteration --morgan_directory path_morgan_library/morgan_library --time 00-04:00 --file_path path_project/project --number_of_hyp num_models_to_train --total_iterations number_total_iterations --is_last is_this_last_iteration (False/True)? --number_mol num_molecules_test_valid_set --percent_first_mols percent_first_molecules --percent_last_mols percent_last_mols -recall recall_value 
 ```
 
-* `extract_labels.py` extracts docking scores for model training. It should generate three comma-spaced files, `training_labels.txt`, `validation_labels.txt` and `testing_labels.txt` inside the current iteration folder.
+* `extract_labels.py` extracts docking scores for model training. It should generate three comma-seperated files, `training_labels.txt`, `validation_labels.txt` and `testing_labels.txt` inside the current iteration folder.
 
-* `simple_job_models_manual.py` creates bash scripts to run model training using the `progressive_docking.py` script. These scripts are generated inside the `simple_job` folder in the current iteration. Note that if `--recall` is not specified, the recall value will be set to 0.9. *--time* argument is the maximal time of training in days-hours:mins format (normally, values between 4 and 20 hours work well).
+* `simple_job_models_manual.py` creates bash scripts to run model training using the `progressive_docking.py` script. These scripts are generated inside the `simple_job` folder in the current iteration. Note that if `--recall` is not specified, the recall value will be set to 0.9. `--time` argument is the maximum time for training in days-hours:mins format (normally, training won't take more than 4-20 hours depending on your system).
 
 The bash scripts generated by `simple_job_models.py` in the iteration directory, *simple_job* foldder, should be then run on GPUs to train DD models. The resulting models will be saved in the `all_models` folder in the current iteration.
 
 ### v. Phase 5. Selection of best model and prediction of virtual hits
-In phase 5 the models are evalauted with a grid search, and the model with the highest precision is selected for predicting scores of all the molecules in the database. This step will create a `morgan_1024_predictions` folder in the iteration directory, which will contain all the molecules that are predicted as virtual hits. To run phase 3, use the following scripts from *scripts_2* with the environment activated:
+In phase 5 the models are evalauted with a grid search, and the model with the highest precision is selected for predicting scores of all the molecules in the database. This step will create a `morgan_1024_predictions` folder in the iteration directory, which will contain all the molecules that are predicted as virtual hits. 
+To run phase 5, use the following scripts from *scripts_2* with the conda environment activated:
 
 ```bash
 python hyperparameter_result_evaluation.py --n_iteration current_iteration --data_path path_project/project --morgan_directory path_morgan_library/morgan_library --number_mol num_molecules --recall recall_value
@@ -101,18 +102,18 @@ python simple_job_predictions_manual.py --project_name project --file_path path_
 
 ```
 
-* `hyperparameter_result_evaluation.py` evaluates the models generated in phase 2 and select the best (most precise) one.
+* `hyperparameter_result_evaluation.py` evaluates the models generated in phase 4 and select the best (most precise) one.
 
-* `simple_job_predictions.py` creates bash scripts to run the predictions over the full database using the `Prediction_morgan_1024.py` script. Inference scripts will be saved in the `simple_job_predictions` folder of the current iteration, and they should be run on GPU nodes in order to predict virtual hits from the full database. Prospective hits will be saved in `morgan_1024_predictions` folder of the current iteration, together with their virutal hit likeness.
+* `simple_job_predictions.py` creates bash scripts to run the predictions over the full database using the `Prediction_morgan_1024.py` script. These scripts will be saved in the `simple_job_predictions` folder of the current iteration, and they should be run on GPU nodes in order to predict virtual hits from the full database. Prospective hits will then be saved in `morgan_1024_predictions` folder of the current iteration, together with their virutal hit likeness.
 
 ### vi. Final docking phase
-After the last iteration of DD is complete, SMILES of all or a ranked subset of the predicted virtual hits can be obtained for the final docking. Ranking is based on the probabilities of being virtual hits. With the environment activated, use the following script (availabe in `utilities`):
+After the last iteration of DD is complete, SMILES of all or a ranked subset of the predicted virtual hits can be obtained for the final docking. Ranking is based on the probabilities of being virtual hits. With the environment activated, use the following script (available in `utilities`):
 
 ```bash
 python final_extraction.py -smile_dir path_smiles_library/smiles_library -prediction_dir path_last_iteration/morgan_1024_predictions -processors n_cpus -mols_to_dock num_molecules_to_dock
 ```
 
-to return the SMILES of all the predicted virtual hits of the last iteration or the top `num_molecules_to_dock` molecules ranked by their virtual hit likeness. If *mols_to_dock* is not specified, all the prospective hits will be extracted. Virtual hit likeness will also be returned in a separated file. These molecules can be then docked into the target of interest.
+This will return a list of SMILES of all the predicted virtual hits of the last iteration or the top `num_molecules_to_dock` molecules ranked by their virtual hit likeness. If *mols_to_dock* is not specified, all the prospective hits will be extracted. Virtual hit likeness will also be returned in a separated file. These molecules can be then docked into the target of interest.
 
 
 ## B. Run automated Deep Docking on HPC clusters
