@@ -6,7 +6,7 @@
 file_path=`sed -n '1p' $3/$4/logs.txt`
 protein=`sed -n '2p' $3/$4/logs.txt`
 grid_file=`sed -n '3p' $3/$4/logs.txt`
-glide_input_file=`sed -n '8p' $3/$4/logs.txt`
+glide_input_file=`sed -n '9p' $3/$4/logs.txt`
 
 morgan_directory=`sed -n '4p' $3/$4/logs.txt`
 smile_directory=`sed -n '5p' $3/$4/logs.txt`
