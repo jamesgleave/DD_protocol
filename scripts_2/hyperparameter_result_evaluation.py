@@ -167,7 +167,7 @@ for i in range(len(model_to_use_with_cf)):
     n_good_mol = len([x for x in y_valid if x < cf]) # num of molec that are under the cutoff value
     print('\t',cf,'cf:',len(model_to_use_with_cf[i]))
 
-    # If not enough molecules exceed the cutoff then we only save one of the models and ignore the rest ## Why is this done?
+    # If not enough molecules exceed the cutoff then we only save one of the models and ignore the rest
     if n_good_mol <= 10000: 
         model_to_use_with_cf[i][1] = [model_to_use_with_cf[i][1][0]]    # Still maintaing the format: [ [cf_1, [model_no_1, ...]], [cf_2, [model_no_1, ...]] ... ]
 
