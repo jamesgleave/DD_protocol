@@ -118,6 +118,10 @@ first_mols = int(100*t_mol/13) if percent_first_mols == -1.0 else int(percent_fi
 
 print(first_mols)
 
+last_mols = 100 if percent_last_mols == -1.0 else int(percent_last_mols * len(scores_val))
+
+print(last_mols)
+
 if n_it==1:
     # 'good_mol' is the number of top scoring molecules to save at the end of the iteration
     good_mol = first_mols
@@ -127,7 +131,7 @@ else:
     elif polynomial_dec != -1:
         good_mol = int()
     else:
-        good_mol = int(((100-first_mols)*n_it + titr*first_mols-100)/(titr-1))     # linear decrease as interations increase
+        good_mol = int(((last_mols-first_mols)*n_it + titr*first_mols-last_mols)/(titr-1))     # linear decrease as interations increase
 
 
 print(isl)
