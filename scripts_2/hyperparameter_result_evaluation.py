@@ -230,7 +230,11 @@ for i in range(len(model_to_use_with_cf)):
     avg_pred = avg_pred > (len(models)//2)  # if greater than 50% of the models agree there would be a hit then that is our consensus value
     print('avg_pred:', avg_pred)
 
-    fpr_te_avg, tpr_te_avg, thresh_te_avg = roc_curve(y_test_cf, avg_pred)
+    if len(models) > 1:
+        fpr_te_avg, tpr_te_avg, thresh_te_avg = roc_curve(y_test_cf, avg_pred)
+    else:
+        fpr_te_avg, tpr_te_avg, thresh_te_avg = roc_curve(y_test_cf, prediction_test[0])
+    
     pr_te_avg = precision_score(y_test_cf, avg_pred)
     re_te_avg = recall_score(y_test_cf, avg_pred)   # TODO: make sure avg_pred is calc properly
 
