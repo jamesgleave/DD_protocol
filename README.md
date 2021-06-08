@@ -33,7 +33,7 @@ python script.py -h
 
 
 ## A. Run Deep Docking manually
-Here we present in details how to use each individual script constituting DD. If you have access to an HPC cluster, you may want to consider running the automated protocol using a job scheduler (see Run automated Deep Docking on HPC clusters section below).
+Here we present in details how to use each individual script constituting DD. If you have access to an HPC cluster, you may want to consider running the automated protocol using Slurm job scheduler (see Run automated Deep Docking on HPC clusters section below).
 
 ### i. Preparing a database
 In order to be prepared for DD virtual screening, the chemical library must be in SMILES format. DD requires Morgan fingerprints of radius 2 and size 1024 bits for each molecule, represented in a compressed form as a list of the indexes of bits that are set to 1. 
@@ -117,7 +117,7 @@ This will return a list of SMILES of all the predicted virtual hits of the last 
 
 
 ## B. Run automated Deep Docking on HPC clusters
-As part of this repository, we provide a series of scripts to run the process on a slurm cluster using the preparation and docking tools that we regularly employ in virtual screening campaigns. The workflow can be trivially adapted to any other set of tools by modifying the scripts of phase 2, 3 and 4. Additionally, the user will need to either modify the headers of the slurm scripts or pass the #SBATCH values from command line in order to satisfy the requirements of the cluster that is being used. 
+As part of this repository, we provide a series of scripts to run the process on a Slurm cluster using the preparation and docking tools that we regularly employ in virtual screening campaigns. The workflow can be trivially adapted to any other set of tools by modifying the scripts of phase 2, 3 and 4. Additionally, the user will need to either modify the headers of the slurm scripts or pass the #SBATCH values from command line in order to satisfy the requirements of the cluster that is being used. 
 
 ### i. Automated library preparation
 In our DD automated version, SMILES preparation is performed using OpenEye tools (flipper, https://docs.eyesopen.com/applications/omega/flipper.html and tautomers, https://docs.eyesopen.com/applications/quacpac/tautomers/tautomers.html, both require license). Use the `compute_states.sh` script provided in `utilities` to submit a preparation job for each original SMILES file:
@@ -126,7 +126,7 @@ In our DD automated version, SMILES preparation is performed using OpenEye tools
 for i in $(ls smiles/smile_all_*.smi); do sbatch compute_states.sh $i library_prepared; done
 ```
 
-THe SMILES will be prepared and saved into the `library_prepared` folder. Note that this program will enumerate all the unspecified chiral centers of the molecules and assign unique names to each isomer, and then calculate the dominant tautomer at pH 7.4. The next step is the calculation of Morgan fingerprints; run:
+The SMILES will be prepared and saved into the `library_prepared` folder. Note that this program will enumerate all the unspecified chiral centers of the molecules and assign unique names to each isomer, and then calculate the dominant tautomer at pH 7.4. The next step is the calculation of Morgan fingerprints; run:
 
 ```bash
 sbatch --cpus-per-task n_cpus_per_node compute_morgan_fp.sh library_prepared library_prepared_fp n_cpus_per_node conda_environment
@@ -175,7 +175,7 @@ Run:
 ```bash
 sbatch phase_4.sh current_iteration 3 path_project project name_gpu_partition tot_number_iterations percent_first_mols percent_last_mols recall_value 00-04:00 conda_env
 ```
-00-04:00 is the maximal training time (days-hours:mins). Use a value between 4 and 20 hours.
+00-04:00 is the maximal training time (days-hours:mins) after which Slurm will cancel the job. Use a value between 4 and 20 hours.
 
 ### v. Automated phase 5
 Run:
