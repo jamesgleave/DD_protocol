@@ -83,7 +83,7 @@ In phase 4, deep neural network models are trained with the docking scores from 
 
 ```bash
 python extract_labels.py --project_name project --file_path path_to_project --iteration_no current_iteration --tot_process num_cpus -score score_keyword
-python simple_job_models_manual.py --iteration_no current_iteration --morgan_directory path_morgan_library/morgan_library --time 00-04:00 --file_path path_project/project --number_of_hyp num_models_to_train --total_iterations number_total_iterations --is_last is_this_last_iteration (False/True)? --number_mol num_molecules_test_valid_set --percent_first_mols percent_first_molecules --percent_last_mols percent_last_mols -recall recall_value 
+python simple_job_models_manual.py --iteration_no current_iteration --morgan_directory path_morgan_library/morgan_library --file_path path_project/project --number_of_hyp num_models_to_train --total_iterations number_total_iterations --is_last is_this_last_iteration (False/True)? --number_mol num_molecules_test_valid_set --percent_first_mols percent_first_molecules --percent_last_mols percent_last_mols -recall recall_value 
 ```
 
 * `extract_labels.py` extracts docking scores for model training. It should generate three comma-seperated files, `training_labels.txt`, `validation_labels.txt` and `testing_labels.txt` inside the current iteration folder.
