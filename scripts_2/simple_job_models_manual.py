@@ -24,7 +24,6 @@ START_TIME = time.time()
 parser = argparse.ArgumentParser()
 parser.add_argument('-n_it','--iteration_no',required=True,help='Number of current iteration')
 parser.add_argument('-mdd','--morgan_directory',required=True,help='Path to the Morgan fingerprint directory for the database')
-parser.add_argument('-time','--time',required=True,help='Time limit for training')
 parser.add_argument('-file_path','--file_path',required=True,help='Path to the project directory, including project directory name')
 parser.add_argument('-nhp','--number_of_hyp',required=True,help='Number of hyperparameters')
 parser.add_argument('-titr','--total_iterations',required=True,help='Desired total number of iterations')
@@ -53,7 +52,6 @@ funct_flags.add_argument('-polydec', '--polynomial_dec', required=False, default
 io_args, extra_args = parser.parse_known_args()
 n_it = int(io_args.iteration_no)
 mdd = io_args.morgan_directory
-time_model = io_args.time
 nhp = int(io_args.number_of_hyp)
 isl = io_args.is_last
 titr = int(io_args.total_iterations)
