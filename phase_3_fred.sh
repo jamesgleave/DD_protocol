@@ -36,7 +36,7 @@ echo \$1
 echo \$2
 echo \$3
 
-\$openeye fred -receptor \$1 -dbase \$2 -docked_molecule_file phase_3_\$3\_docked.sdf -hitlist_size 0 -mpi_np \$4 -prefix \$3
+fred -receptor \$1 -dbase \$2 -docked_molecule_file phase_3_\$3\_docked.sdf -hitlist_size 0 -mpi_np \$4 -prefix \$3
 rm *undocked*sdf">>$temp'_'docking.sh
     
     sbatch -J $SLURM_JOB_NAME -p $cpu_part -c $t_nod $temp'_'docking.sh $grid_file $f $temp $t_nod
