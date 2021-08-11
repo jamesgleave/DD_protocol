@@ -50,7 +50,7 @@ def train_valid_test(file_name):
     f_name = file_name.split('/')[-1]
     mol_ct = pd.read_csv(data_directory+"/Mol_ct_file_updated_%s.csv"%protein, index_col=1)
     if n_it == 1:
-        to_sample = int(mol_ct.loc[f_name].Sample_for_million/(int(rt_sz+2)))
+        to_sample = int(mol_ct.loc[f_name].Sample_for_million/(rt_sz+2))
     else:
         to_sample = int(mol_ct.loc[f_name].Sample_for_million/3)
 
