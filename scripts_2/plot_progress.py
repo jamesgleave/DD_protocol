@@ -95,7 +95,7 @@ for i in range(it_1, it_2 + 1):
     model_pred = model.predict(X_test)
     fpr, tpr, threshold = roc_curve(y_test_cf, model_pred, drop_intermediate=False)
     roc_auc = auc(fpr, tpr)
-    plt.plot(fpr, tpr, label = 'AUC it. %i= %0.3f'%(i, roc_auc))
+    plt.plot(fpr, tpr, label = 'AUC it. %i = %0.3f'%(i, roc_auc))
 
 plt.legend(loc = 'lower right')    
 plt.tight_layout()
