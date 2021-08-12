@@ -165,7 +165,7 @@ print('Reducing models,', len(model_to_use_with_cf))
 for i in range(len(model_to_use_with_cf)):
     cf = model_to_use_with_cf[i][0]
     n_good_mol = len([x for x in y_valid if x < cf]) # num of molec that are under the cutoff value
-    print('\t',cf,'cf:',len(model_to_use_with_cf[i]))
+    print('\t','cf:',cf)
 
     # If not enough molecules exceed the cutoff then we only save one of the models and ignore the rest
     if n_good_mol <= 10000: 
