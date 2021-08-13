@@ -75,7 +75,6 @@ if SAVE_PATH is None: SAVE_PATH = DATA_PATH
 t_mol = pd.read_csv(mdd+'/Mol_ct_file_%s.csv'%protein,header=None)[[0]].sum()[0]/1000000 # num of compounds in each file is mol_ct_file
 
 cummulative = 0.25*n_it
-num_units = [100, 1500,2000]
 dropout = [0.2, 0.5]
 learn_rate = [0.0001]
 bin_array = [2, 3]
@@ -91,6 +90,11 @@ elif nhp < 72:
     oss = [5, 10]
 else:
     oss = [5, 10, 20]
+    
+if nhp < 24:
+    num_units = [1500, 2000]
+else:
+    num_units = [100, 1500, 2000]
 
 try:
     os.mkdir(SAVE_PATH+'/iteration_'+str(n_it)+'/simple_job')
