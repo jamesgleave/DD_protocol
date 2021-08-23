@@ -8,7 +8,6 @@ import os
 from ML.DDModel import DDModel
 from sklearn.metrics import auc
 from sklearn.metrics import roc_curve
-import glob
 
 
 parser = argparse.ArgumentParser()
