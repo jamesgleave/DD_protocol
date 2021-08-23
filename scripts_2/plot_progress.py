@@ -16,7 +16,7 @@ parser.add_argument('-pr','--project',required=True,help='Location of project')
 parser.add_argument('-sz_test','--size_test_set',required=True,help='Number of molecules in the test set')
 parser.add_argument('-it_1','--start_iteration',required=True,help='Number of first iteration to analyze')
 parser.add_argument('-it_2','--end_iteration',required=True,help='Number of last iteration to analyze')
-parser.add_argument('-fo','--output_folder',required=True,help='FOlder where to output the figures')
+parser.add_argument('-fo','--output_folder',required=True,help='Folder where to output the figures')
 
 io_args = parser.parse_args()
 path = io_args.project
