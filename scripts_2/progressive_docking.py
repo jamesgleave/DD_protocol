@@ -228,7 +228,7 @@ elif (n_iteration == 1) and (TRAINING_SIZE != -1):
     if TRAINING_SIZE > len(train_data):     # If a training set size larger than all the available training data (number of lines int raining_set_labels.txt excluding the first) is chosen, use all the available data and print a warning
         print("Maximum training size reached. Using all training data...")
     else:                                   # If the size is less than all the available training data, randomly sample the dataset
-        train_data = train_data.sample(n=TRAINING_SIZE, replace=True)    
+        train_data = train_data.sample(n=TRAINING_SIZE)    
 
 print("Training labels shape: ", train_data.shape)
 
