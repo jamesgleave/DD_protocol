@@ -81,6 +81,9 @@ plt.ylim([0, 1])
 plt.ylabel('TPR')
 plt.xlabel('FPR')
 
+zinc_labels_test = get_zinc_and_labels(path + '/iteration_1/morgan/test_morgan_1024_updated.csv', path +'/iteration_1/testing_labels.txt')
+X_test, y_test = get_all_x_data(path +'/iteration_1/morgan/test_morgan_1024_updated.csv', zinc_labels_test)
+
 for i in range(it_1, it_2 + 1):
     mod_name = str(glob.glob(path + '/iteration_%i/best_models/model_*.ddss'%i)).split('/')[-1].split('.')[0]
     print('Now processing iteration %i'%i)
@@ -88,8 +91,6 @@ for i in range(it_1, it_2 + 1):
     thr = pd.read_csv(path +'/iteration_%i/best_models/thresholds.txt'%i, names=['n','prob','score'])
     prob = float(thr['prob'])
     score = float(thr['score'])
-    zinc_labels_test = get_zinc_and_labels(path + '/iteration_1/morgan/test_morgan_1024_updated.csv', path +'/iteration_1/testing_labels.txt')
-    X_test, y_test = get_all_x_data(path +'/iteration_1/morgan/test_morgan_1024_updated.csv', zinc_labels_test)
     y_test_cf = y_test<score
     model_pred = model.predict(X_test)
     fpr, tpr, threshold = roc_curve(y_test_cf, model_pred, drop_intermediate=False)
