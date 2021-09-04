@@ -1,0 +1,20 @@
+name: dd-env
+
+channels:
+  - conda-forge
+  - defaults
+  - anaconda
+
+dependencies:
+  - python=3.8
+  - cudatoolkit=10.1
+  - cudnn=7.6
+  - nccl=2.4
+  - tensorflow-gpu=2.2
+  - numpy
+  - pandas
+  - scikit-learn
+  - pydot
+  - rdkit
+  - ipython
+  - matplotlib
