@@ -126,7 +126,7 @@ else:
     elif polynomial_dec != -1:
         good_mol = int()
     else:
-        good_mol = int(((100-first_mols)*n_it + titr*first_mols-100)/(titr-1))     # linear decrease as interations increase
+        good_mol = int(((last_mols-first_mols)*n_it + titr*first_mols-last_mols)/(titr-1))     # linear decrease as interations increase
 
 
 print(isl)
