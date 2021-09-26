@@ -119,6 +119,8 @@ print(first_mols)
 
 last_mols = 100 if percent_last_mols == -1.0 else int(percent_last_mols * len(scores_val))
 
+print(last_mols)
+
 if n_it==1:
     # 'good_mol' is the number of top scoring molecules to save at the end of the iteration
     good_mol = first_mols
