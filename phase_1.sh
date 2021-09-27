@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=normal
 #SBATCH --ntasks=1
+#SBATCH --cpus-per-task=60
 #SBATCH --mem=0
 #SBATCH --job-name=phase_1
 
