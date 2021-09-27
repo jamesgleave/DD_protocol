@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=normal
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=60
+#SBATCH --cpus-per-task=60       #change this to match the number of processors you want to use
 #SBATCH --mem=0
 #SBATCH --job-name=phase_1
 
