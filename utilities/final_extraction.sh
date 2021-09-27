@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --partition=normal
+#SBATCH --cpus-per-task=60     #change this to match the number of processors you want to use
 #SBATCH --job-name=extract
 
 source ~/.bashrc
