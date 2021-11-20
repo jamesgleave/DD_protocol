@@ -233,8 +233,8 @@ elif (n_iteration == 1) and (TRAINING_SIZE != -1):
 print("Training labels shape: ", train_data.shape)
 
 # Exiting if there are not enough hits
-if (valid_data.r_i_docking_score < cf).values.sum() <= 10 or \
-        (test_data.r_i_docking_score < cf).values.sum() <= 10:
+if (y_valid_first.r_i_docking_score < cf).values.sum() <= 10 or \
+        (y_test_first.r_i_docking_score < cf).values.sum() <= 10:
     print("There are not enough hits... exiting.")
     sys.exit()
 
