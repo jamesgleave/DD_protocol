@@ -4,7 +4,7 @@ Deep docking (DD) is a deep learning-based tool developed to accelerate docking-
 
 If you use DD in your research, please cite:
 
-Gentile F, Agrawal V, Hsing M, Ton A-T, Ban F, Norinder U, et al. *Deep Docking: A Deep Learning Platform for Augmentation of Structure Based Drug Discovery.* ACS Cent Sci 2020:acscentsci.0c00229.
+Gentile, F. et al. Deep Docking: A Deep Learning Platform for Augmentation of Structure Based Drug Discovery. ACS Cent. Sci. 6, 939–949 (2020).
 
 
 ## Requirements
@@ -21,7 +21,7 @@ The majority of the DD steps can be run on regular CPU cores; for model training
 
 
 ## Test data
-A complete example of DD iteration for testing the protocol is available from https://drive.google.com/drive/folders/1s1wjoNXZR1wijVABgLl6HeKzokAlxcAG?usp=sharing. A DD-prepared version of the ZINC20 library (as available in March 2021) that can readily be screened with the protocol is available at https://drive.google.com/drive/folders/1-XlN3spOI-bAKhRdfIhA_Q0l2EsITeaD?usp=sharing
+A complete example of DD iteration for testing the protocol is available from https://doi.org/10.20383/102.0489. A DD-prepared version of the ZINC20 library (as available in March 2021) that can readily be screened with the protocol is available at https://files.docking.org/zinc20-ML/
 
 
 ## Help
