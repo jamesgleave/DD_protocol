@@ -10,7 +10,7 @@ dependencies:
   - cudatoolkit=10.1
   - cudnn=7.6
   - nccl=2.4
-  - tensorflow-gpu=2.2
+  - tensorflow-gpu=1.15
   - numpy
   - pandas
   - scikit-learn
