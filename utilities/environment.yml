@@ -6,7 +6,7 @@ channels:
   - anaconda
 
 dependencies:
-  - python=3.8
+  - python=3.6
   - cudatoolkit=10.1
   - cudnn=7.6
   - nccl=2.4
