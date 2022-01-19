@@ -7,7 +7,7 @@ channels:
 
 dependencies:
   - python=3.6
-  - cudatoolkit=10.1
+  - cudatoolkit=10.0
   - cudnn=7.6
   - nccl=2.4
   - tensorflow-gpu=1.15
