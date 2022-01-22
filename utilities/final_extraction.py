@@ -11,14 +11,14 @@ def merge_on_smiles(pred_file):
     print("Merging " + os.path.basename(pred_file) + "...")
 
     # Read the predictions
-    pred = pd.read_csv(pred_file, names=["id", "score"], index_col=0)
+    pred = pd.read_csv('smiles_all_1.txt', names=["id", "score"])
     pred.drop_duplicates()
 
     # Read the smiles
     smile_file = os.path.join(args.smile_dir, os.path.basename(pred_file))
-    smi = pd.read_csv(smile_file, delimiter=" ", names=["smile", "id"], index_col=1)
+    smi = pd.read_csv(smile_file, delimiter=" ", names=["smile", "id"])
     smi = smi.drop_duplicates()
-    return pd.merge(pred, smi, how="inner", on=["id"])
+    return pd.merge(pred, smi, how="inner", on=["id"]).set_index("id")
 
 
 if __name__ == '__main__':
