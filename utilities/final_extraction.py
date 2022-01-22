@@ -11,7 +11,7 @@ def merge_on_smiles(pred_file):
     print("Merging " + os.path.basename(pred_file) + "...")
 
     # Read the predictions
-    pred = pd.read_csv('smiles_all_1.txt', names=["id", "score"])
+    pred = pd.read_csv(pred_file, names=["id", "score"])
     pred.drop_duplicates()
 
     # Read the smiles
