@@ -1,11 +1,11 @@
 # The Deep Docking protocol
 
-Deep docking (DD) is a deep learning-based tool developed to accelerate docking-based virtual screening. Using a docking program of choice, the method allows to virtually screem extensive chemical libraries 50 times faster than conventional docking without losing valuable drug candidates. For further details into the processes behind DD, please refer to our paper (https://doi.org/10.1021/acscentsci.0c00229). This repository provides all the scripts required to run different stages of DD, and also slurm programs to automatically perform the protocol on a computing cluster using either Glide SP or FRED docking. The protocol can be trivially adapted to any other docking program.
+Deep docking (DD) is a deep learning-based tool developed to accelerate docking-based virtual screening. Using a docking program of choice, the method allows to virtually screem extensive chemical libraries 50 times faster than conventional docking without losing valuable drug candidates. For further details into the processes behind DD, please refer to our paper (https://doi.org/10.1021/acscentsci.0c00229). This repository provides all the scripts required to run different stages of DD, and also slurm programs to automatically perform the protocol on a computing cluster using either Glide SP or FRED docking. The protocol has been published (https://www.nature.com/articles/s41596-021-00659-2) and can be trivially adapted to any other docking program.
 
 If you use DD in your research, please cite:
 
-Gentile, F. et al. Deep Docking: A Deep Learning Platform for Augmentation of Structure Based Drug Discovery. ACS Cent. Sci. 6, 939–949 (2020).
-
+Gentile, F. et al. Deep Docking: A Deep Learning Platform for Augmentation of Structure Based Drug Discovery. ACS Cent. Sci. 6, 939–949 (2020)
+Gentile, F. et al. Artificial intelligence–enabled virtual screening of ultra-large chemical libraries with deep docking. Nat. Protoc. (2022)
 
 ## Requirements
 The only installation step required for DD is to create a conda environment and install the following packages within it:
