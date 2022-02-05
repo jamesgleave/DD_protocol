@@ -4,7 +4,7 @@ Deep docking (DD) is a deep learning-based tool developed to accelerate docking-
 
 If you use DD in your research, please cite:
 
-Gentile, F. et al. Deep Docking: A Deep Learning Platform for Augmentation of Structure Based Drug Discovery. ACS Cent. Sci. 6, 939–949 (2020).
+Gentile, F. et al. Deep Docking: A Deep Learning Platform for Augmentation of Structure Based Drug Discovery. ACS Cent. Sci. 6, 939–949 (2020).  
 Gentile, F. et al. Artificial intelligence–enabled virtual screening of ultra-large chemical libraries with deep docking. Nat. Protoc. (2022).
 
 
