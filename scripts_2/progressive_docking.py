@@ -223,7 +223,8 @@ for i in range(1, n_iteration+1):
 
 # Always using the same valid and test dataset across all iterations:
 if n_iteration != 1:
-    train_data = pd.concat([train_data, test_data, valid_data], axis=0) # These datasets are from the current iteration.    train_data = pd.concat([train_data, data_from_prev])   # combining all the datasets into a single training set for iterations after the first
+    train_data = pd.concat([train_data, test_data, valid_data], axis=0) # These datasets are from the current iteration.    
+    train_data = pd.concat([train_data, data_from_prev])   # combining all the datasets into a single training set for iterations after the first
 elif (n_iteration == 1) and (TRAINING_SIZE != -1):
     if TRAINING_SIZE > len(train_data):     # If a training set size larger than all the available training data (number of lines in training_set_labels.txt excluding the first) is chosen, use all the available data and print a warning
         print("Maximum training size reached. Using all training data...")
