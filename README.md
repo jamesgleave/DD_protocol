@@ -12,7 +12,7 @@ Gentile, F. et al. Artificial intelligence–enabled virtual screening of ultra-
 ## Requirements
 The only installation step required for DD is to create a conda environment and install the following packages within it:
 * rdkit
-* tensorflow >= 1.14.0
+* tensorflow >= 1.14.0 (GPU version recommended. If you are using cuda11, please use [nvidia-tensorflow](https://developer.nvidia.com/blog/accelerating-tensorflow-on-a100-gpus/) 
 * pandas
 * numpy
 * keras
