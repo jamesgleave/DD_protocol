@@ -110,7 +110,7 @@ def get_oversampled_morgan(Oversampled_zid, fname):
 
             # only extracting those that were randomly selected
             if (tmp[0] in Oversampled_zid.keys()) and (type(Oversampled_zid[tmp[0]]) != np.ndarray):
-                train_set = np.zeros([1,1024])
+                train_set = np.zeros([1,1024], dtype=np.bool)
                 on_bit_vector = tmp[1:]
 
                 for elem in on_bit_vector:
@@ -145,7 +145,7 @@ def get_morgan_and_scores(morgan_path, ID_labels):
     train_set = train_set[:line_no,:]
 
     print('Done...')
-    train_pd = pd.DataFrame(data=train_set, dtype=np.uint8)
+    train_pd = pd.DataFrame(data=train_set, dtype=np.bool)
     train_pd['ZINC_ID'] = train_id
 
     ID_labels = ID_labels.to_frame()
@@ -329,7 +329,7 @@ if SMILES:
     Oversampled_X_train = np.zeros([sample_size*2, len(list(Oversampled_zid.values())[0][0])])
     print(len(list(Oversampled_zid.values())[0]))
 else:
-    Oversampled_X_train = np.zeros([sample_size*2, 1024])
+    Oversampled_X_train = np.zeros([sample_size*2, 1024], dtype=np.bool)
     print('Using morgan fingerprints...')
     # this part is what gets the morgan fingerprints:
     print('looking through file path:', DATA_PATH + '/iteration_'+str(n_iteration)+'/morgan/*')
@@ -392,6 +392,19 @@ class TimedStopping(Callback):
             if self.verbose:
                 print('Stopping after %s seconds.' % self.seconds)
 
+#FREE MEMORY
+
+del data_from_prev
+del train_data
+del test_data
+del valid_data
+del Oversampled_zid
+del Oversampled_zid_y
+del y_valid_first
+del y_test_first
+gc.collect()
+
+#END FREE MEMORY
 
 print("Data prep time:", time.time() - START_TIME)
 print("Configuring model...")
