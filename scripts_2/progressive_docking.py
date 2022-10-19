@@ -2,6 +2,7 @@
 V 2.2.1
 """
 
+import gc
 import argparse
 import glob
 import os
