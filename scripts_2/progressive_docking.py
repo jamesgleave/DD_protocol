@@ -396,6 +396,11 @@ class TimedStopping(Callback):
 #FREE MEMORY
 
 del data_from_prev
+del bin_valid
+del y_neg
+del neg_keys
+del y_pos
+del pos_keys
 del train_data
 del test_data
 del valid_data
@@ -403,6 +408,9 @@ del Oversampled_zid
 del Oversampled_zid_y
 del y_valid_first
 del y_test_first
+del y_train
+del y_old
+
 gc.collect()
 
 #END FREE MEMORY
