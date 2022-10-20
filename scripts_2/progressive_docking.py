@@ -401,7 +401,6 @@ del y_neg
 del neg_keys
 del y_pos
 del pos_keys
-del train_data
 del test_data
 del valid_data
 del Oversampled_zid
