@@ -42,7 +42,7 @@ def prediction_morgan(fname, models, thresh):   # TODO: improve runtime with par
     per_time = 1000000
     n_features = 1024
     z_id = []
-    X_set = np.zeros([per_time, n_features])
+    X_set = np.zeros([per_time, n_features], dtype=np.bool)
     total_passed = 0
 
     print("We are predicting from the file", fname, "located in", mdd)
@@ -73,7 +73,7 @@ def prediction_morgan(fname, models, thresh):   # TODO: improve runtime with par
                             total_passed += 1
                             line = z_id[j]+','+str(float(pred[i][j]))+'\n'
                             ref.write(line)
-                X_set = np.zeros([per_time,n_features])
+                X_set = np.zeros([per_time,n_features], dtype=np.bool)
                 z_id = []
                 no = 0
 
