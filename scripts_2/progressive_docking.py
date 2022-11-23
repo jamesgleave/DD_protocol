@@ -396,7 +396,6 @@ class TimedStopping(Callback):
 #FREE MEMORY
 
 del data_from_prev
-del bin_valid
 del y_neg
 del neg_keys
 del y_pos
