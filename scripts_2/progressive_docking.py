@@ -170,7 +170,7 @@ def get_data(smiles_path, morgan_path, labels_path):
         smiles = pd.read_csv(smiles_path, sep=' ', names=['smile', 'ZINC_ID'])
         data = smiles.merge(labels, on='ZINC_ID')
     else:
-        morgan = pd.read_csv(morgan_path, usecols=[0], header=0, names=['ZINC_ID']) # reading in only the zinc ids
+        morgan = pd.read_csv(morgan_path, usecols=[0], header=None, names=['ZINC_ID']) # reading in only the zinc ids
         data = morgan.merge(labels, on='ZINC_ID')
     data.set_index('ZINC_ID', inplace=True)
     return data
