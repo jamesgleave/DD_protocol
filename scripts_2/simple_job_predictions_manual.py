@@ -46,7 +46,7 @@ for f in part_files:
         print(SAVE_PATH + '/iteration_' + str(n_it) + '/simple_job_predictions/simple_job_' + str(ct) + '.sh')
         ref.write('#!/bin/bash\n')
         cwd = os.getcwd()
-        ref.write('cd {}/scripts_2\n'.format(cwd))
+        ref.write('cd {}\n'.format(cwd))
         ref.write('python -u ' + 'Prediction_morgan_1024.py' + ' ' + '-fn' + ' ' + f.split('/')[
             -1] + ' ' + '-protein' + ' ' + protein + ' ' + '-it' + ' ' + str(n_it) + ' ' + '-mdd' + ' ' + str(
             mdd) + ' ' + '-file_path' + ' ' + SAVE_PATH + '\n')
