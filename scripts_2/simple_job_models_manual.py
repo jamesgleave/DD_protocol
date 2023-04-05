@@ -173,7 +173,7 @@ for i in range(len(all_hyperparas)):
     with open(SAVE_PATH+'/iteration_'+str(n_it)+'/simple_job/simple_job_'+str(count)+'.sh', 'w') as ref:
         ref.write('#!/bin/bash\n')
         cwd = os.getcwd()
-        ref.write('cd {}/scripts_2\n'.format(cwd))
+        ref.write('cd {}\n'.format(cwd))
         hyp_args = '-os {} -bs {} -num_units {} -dropout {} -learn_rate {} -bin_array {} -wt {} -cf {}'.format(*all_hyperparas[i])
         ref.write('python -u progressive_docking.py ' + hyp_args + ' ' + other_args)
         ref.write("\n echo complete")
