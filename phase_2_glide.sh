@@ -34,7 +34,7 @@ do
 echo \$1
 echo \$2
 echo \$3
-oeomega classic -in \$1 -out sdf/\$2\_sdf.sdf -maxconfs 1 -strictstereo false -mpi_np \$3 -log \$2.log -prefix \$2">>$name'_'conf.sh
+oeomega classic -in \$1 -out sdf/\$2\_sdf.sdf -maxconfs 1 -strictstereo false -mpi_np \$3 -log \$2.log -prefix \$2 -warts false">>$name'_'conf.sh
 
    sbatch -J $SLURM_JOB_NAME -p $cpu_part -c $t_nod $name'_'conf.sh $f $name $t_nod
 done
