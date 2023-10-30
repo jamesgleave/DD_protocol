@@ -175,7 +175,7 @@ sbatch phase_3_fred.sh current_iteration n_cpus_per_node path_project project na
 Run:
 
 ```bash
-sbatch phase_4.sh current_iteration 3 path_project project name_gpu_partition tot_number_iterations percent_first_mols percent_last_mols_value 00-15:00 conda_env
+sbatch phase_4.sh current_iteration 3 path_project project name_gpu_partition tot_number_iterations percent_first_mols percent_last_mols_value recall_value 00-15:00 conda_env
 ```
 00-15:00 is the maximal training time (days-hours:mins) after which Slurm will cancel the job. Usually each model does not require more than 12 hours to complete the training.
 
